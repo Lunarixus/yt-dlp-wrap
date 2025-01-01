@@ -375,12 +375,14 @@ export default class YTDlpWrap {
     async getVideoInfo(ytDlpArguments: string | string[]): Promise<any> {
         if (typeof ytDlpArguments == 'string')
             ytDlpArguments = [ytDlpArguments];
-        if (
-            !ytDlpArguments.includes('-f') &&
-            !ytDlpArguments.includes('--format')
-        )
-            ytDlpArguments = ytDlpArguments.concat(['-f', 'best']);
-
+    
+        // Remove this block to avoid adding `-f best`
+        // if (
+        //     !ytDlpArguments.includes('-f') &&
+        //     !ytDlpArguments.includes('--format')
+        // )
+        //     ytDlpArguments = ytDlpArguments.concat(['-f', 'best']);
+    
         let ytDlpStdout = await this.execPromise(
             ytDlpArguments.concat(['--dump-json'])
         );
